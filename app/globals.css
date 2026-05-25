@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --cyber: #00ff41;
+  --swe: #3b82f6;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: #0a0a0a;
+  color: #e5e5e5;
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Mode-based accent colour switching */
+.mode-cyber .accent       { color: var(--cyber); }
+.mode-cyber .accent-border{ border-color: var(--cyber); }
+.mode-cyber .accent-bg    { background-color: rgba(0, 255, 65, 0.08); }
+
+.mode-swe .accent         { color: var(--swe); }
+.mode-swe .accent-border  { border-color: var(--swe); }
+.mode-swe .accent-bg      { background-color: rgba(59, 130, 246, 0.08); }
+
+/* Blinking terminal cursor */
+.blinking-cursor { animation: blink 1s step-end infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+
+/* Vinyl spin */
+.vinyl-spin {
+  animation: spin 4s linear infinite;
+  animation-play-state: paused;
+}
+.vinyl-spin.playing { animation-play-state: running; }
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+/* Needle */
+.needle-arm {
+  transform-origin: 90% 10%;
+  transition: transform 0.8s cubic-bezier(.4,0,.2,1);
+}
+.needle-arm.on-record { transform: rotate(22deg); }
+
+/* Song tile */
+.song-tile {
+  border: 1px solid #2a2a2a;
+  background: #111;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.mode-cyber .song-tile:hover,
+.mode-cyber .song-tile.active {
+  border-color: var(--cyber);
+  background: rgba(0,255,65,0.06);
+}
+.mode-swe .song-tile:hover,
+.mode-swe .song-tile.active {
+  border-color: var(--swe);
+  background: rgba(59,130,246,0.06);
+}
+
+/* Detail panel slide in */
+.project-detail-enter {
+  animation: slideIn 0.3s ease;
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* VAPT pulse */
+@keyframes vapt-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+.vapt-pulse { animation: vapt-pulse 2s ease-in-out infinite; }
+
+/* Hide horizontal scrollbar on filter row */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
