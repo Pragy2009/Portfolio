@@ -116,6 +116,7 @@ function Mesh({ accent, nodes, activeId, onHover, onSelect }: Props) {
   return (
     <group
       ref={group}
+      position={[0, -0.7, 0]} // shift mesh downward for better centering
       onPointerMove={onPointerMove}
       onPointerDown={onPointerDown}
       onPointerUp={onPointerUp}

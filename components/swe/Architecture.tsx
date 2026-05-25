@@ -72,14 +72,19 @@ export default function Architecture({ mode }: Props) {
                 [ DISTRIBUTED ARCHITECTURE ]
               </div>
               <div className="text-[9px] font-mono text-gray-800 mb-2 italic">↳ drag to orbit · hover nodes</div>
-              <div className="w-full rounded-lg overflow-hidden" style={{ minHeight: 360, height: 360 }}>
-                <ServiceMeshR3F
-                  accent={accent}
-                  nodes={nodes}
-                  activeId={focusId}
-                  onHover={setHoverId}
-                  onSelect={setSelectedId}
-                />
+              <div
+                className="w-full rounded-lg overflow-hidden flex items-center justify-center"
+                style={{ minHeight: 360, height: 'min(60vw, 520px)', maxHeight: 520 }}
+              >
+                <div className="w-full h-full" style={{ aspectRatio: '1.7/1', minHeight: 360, maxHeight: 520 }}>
+                  <ServiceMeshR3F
+                    accent={accent}
+                    nodes={nodes}
+                    activeId={focusId}
+                    onHover={setHoverId}
+                    onSelect={setSelectedId}
+                  />
+                </div>
               </div>
             </div>
           </div>
