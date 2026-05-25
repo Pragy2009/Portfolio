@@ -31,7 +31,7 @@ const NODE_POSITIONS: [number, number, number][] = [
 
 export default function Architecture({ mode }: Props) {
   const accent = mode === "cyber" ? "#00ff41" : "#3b82f6";
-  const sweProjects = projects.filter((p) => p.cat === "swe");
+  const sweProjects = projects.filter((p) => p.cat === "SWE");
 
   // Build mesh nodes from SWE projects (cap at 5 for clean topology)
   const nodes: MeshNode[] = sweProjects.slice(0, 5).map((p, i) => ({
