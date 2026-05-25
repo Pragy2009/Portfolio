@@ -226,8 +226,9 @@ export default function Terminal() {
         {showPortrait && (
           <div className="flex flex-col sm:flex-row gap-6 items-start">
             {/* Live 3D ASCII avatar — hidden on the smallest screens */}
-            <div className="flex-shrink-0 hidden sm:block">
-              <AsciiAvatar cols={160} rows={110} color="var(--accent, #00ff41)" />
+
+            <div className="flex-shrink-0 hidden sm:block" style={{ maxWidth: 400, maxHeight: 275 }}>
+              <AsciiAvatar cols={80} rows={55} color="var(--accent, #00ff41)" />
             </div>
 
             {/* Simple greeting */}
