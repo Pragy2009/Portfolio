@@ -12,6 +12,8 @@ export default function Connect() {
   const [status, setStatus] = useState<Status>("idle");
   const [errMsg, setErrMsg] = useState("");
 
+  const [honeypot, setHoneypot] = useState("");
+
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     setStatus("sending");
@@ -20,7 +22,12 @@ export default function Connect() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, message }),
+        body: JSON.stringify({
+          name: name.trim(),
+          email: email.trim(),
+          message: message.trim(),
+          company: honeypot,
+        }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data?.error || "Send failed");
@@ -28,6 +35,7 @@ export default function Connect() {
       setName("");
       setEmail("");
       setMessage("");
+      setHoneypot("");
       setTimeout(() => setStatus("idle"), 4500);
     } catch (err: any) {
       setErrMsg(err.message || "Send failed");
@@ -81,9 +89,19 @@ export default function Connect() {
                 placeholder="Encrypt message here..."
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
+                maxLength={5000}
                 className="flex-1 w-full bg-transparent border border-gray-800 rounded p-3 text-white placeholder-gray-700 outline-none focus:border-white transition-colors resize-none"
               />
             </div>
+            <input
+              type="text"
+              name="company"
+              tabIndex={-1}
+              autoComplete="off"
+              value={honeypot}
+              onChange={(e) => setHoneypot(e.target.value)}
+              className="hidden"
+            />
 
             <div className="pt-4 flex justify-end">
               <button
@@ -164,6 +182,8 @@ function Field({
         placeholder={placeholder}
         value={value}
         onChange={(e) => onChange(e.target.value)}
+        maxLength={type === "email" ? 254 : 100}
+        autoComplete={type === "email" ? "email" : "name"}
         className="flex-1 w-full bg-transparent border-b border-gray-800 focus:border-white outline-none py-2 text-white placeholder-gray-700 transition-colors"
       />
     </div>
