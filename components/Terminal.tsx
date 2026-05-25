@@ -205,8 +205,7 @@ export default function Terminal() {
 
   return (
     <div
-      className="bg-black border accent-border rounded-lg shadow-2xl flex flex-col w-full"
-      style={{ height: "620px" }}
+      className="bg-black border accent-border rounded-lg shadow-2xl flex flex-col w-full h-[540px] sm:h-[620px] overflow-hidden"
       onClick={() => inputRef.current?.focus()}
     >
       {/* Title bar */}
@@ -220,19 +219,18 @@ export default function Terminal() {
       </div>
 
       {/* Output */}
-      <div className="flex-1 overflow-y-auto px-6 py-5 font-mono">
+      <div className="flex-1 overflow-y-auto px-4 sm:px-6 py-5 font-mono">
 
         {/* Portrait + simple greeting */}
         {showPortrait && (
-          <div className="flex flex-col sm:flex-row gap-6 items-start">
-            {/* Live 3D ASCII avatar — hidden on the smallest screens */}
-
-            <div className="flex-shrink-0 hidden sm:block" style={{ maxWidth: 400, maxHeight: 275 }}>
-              <AsciiAvatar cols={80} rows={55} color="var(--accent, #00ff41)" />
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-start">
+            {/* Live 3D ASCII avatar */}
+            <div className="flex-shrink-0 w-full max-w-[280px] sm:max-w-[400px]">
+              <AsciiAvatar cols={64} rows={48} color="var(--accent, #00ff41)" />
             </div>
 
             {/* Simple greeting */}
-            <div className="flex flex-col gap-3 min-w-0">
+            <div className="flex flex-col gap-3 min-w-0 w-full">
               <div className="text-white text-lg font-mono leading-tight">
                 Hi there, I&apos;m <span className="accent font-bold">Pragy Jha</span>.
               </div>
@@ -283,7 +281,7 @@ export default function Terminal() {
       {/* Input */}
       <form
         onSubmit={handleSubmit}
-        className="flex items-center gap-2 px-4 py-3 border-t border-gray-900 flex-shrink-0"
+        className="flex flex-wrap items-center gap-2 px-4 py-3 border-t border-gray-900 flex-shrink-0"
         onClick={(e) => e.stopPropagation()}
       >
         <span className="accent font-mono text-xs font-bold flex-shrink-0 whitespace-nowrap">
@@ -294,14 +292,14 @@ export default function Terminal() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
-          className="flex-1 bg-transparent font-mono text-xs text-white outline-none placeholder-gray-700"
+          className="w-full min-w-0 bg-transparent font-mono text-xs text-white outline-none placeholder-gray-700 sm:flex-1"
           placeholder="Type a command..."
           autoComplete="off"
           spellCheck={false}
         />
         <button
           type="submit"
-          className="accent accent-border border px-3 py-1 font-mono text-[10px] font-bold rounded hover:opacity-70 transition-opacity flex-shrink-0"
+          className="w-full sm:w-auto accent accent-border border px-3 py-1 font-mono text-[10px] font-bold rounded hover:opacity-70 transition-opacity flex-shrink-0"
         >
           RUN
         </button>
